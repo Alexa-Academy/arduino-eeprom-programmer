@@ -79,7 +79,8 @@ void writeAddress(byte b) {
   digitalWrite(MEM_A5, bitRead(b, 5));
 }
 
-
+// Funzione da utilizzare per scrivere in RAM
+/*
 void writeCycle(byte data, word address) {
   // 110-1001-0101
   // 11010 010101
@@ -113,9 +114,9 @@ void writeCycle(byte data, word address) {
   digitalWrite(MEM_CS, 1);
   delayMicroseconds(3);
 }
+*/
 
-
-/*
+// Funzione da utilizzare per programmare la EEPROM
 void writeCycle(byte data, word address) {
   // Memorizza la parte alta dell'indirizzo nel 374
   byte high_add = (address >> 6);
@@ -144,7 +145,6 @@ void writeCycle(byte data, word address) {
   digitalWrite(MEM_CS, 1);
   delay(6);
 }
-*/
 
 byte readCycle(word address) {
   // Memorizza la parte alta dell'indirizzo nel 374
@@ -211,8 +211,6 @@ void writeSomeDataInRAM() {
   delay(10);
 }
 
-
-
 void programEPROM() {
   byte ROM[] = {0x3E, 0x00, 0xD3, 0x06, 0xAF, 0xFE, 0x0A, 0x30, 0x03, 0x3C, 0x18, 0xF9, 0x3E, 0x01, 0xD3, 0x06, 0x01, 0x00, 0x00, 0x79, 0xD6, 0x0A, 0x78, 0x17, 0x3F, 0x1F, 0xDE, 0x80, 0x30, 0xE2, 0x03, 0x18, 0xF2};
 
@@ -222,7 +220,6 @@ void programEPROM() {
 
   delay(10);
 }
-
 
 void setup() {
   Serial.begin(115200);
@@ -253,33 +250,6 @@ void setup() {
   //writeSomeDataInRAM(); 
 
   readMemoryBanks(130);
-
-  //writeCycle(0x92, 0x00);
-  //writeCycle(0x3E, 0x02);
-
-/*
-  delay(10);
-
-  byte data_read;
-
-  data_read = readCycle(0x00);
-  sprintf(buffer, "Indirizzo 0x00 - Valore letto: 0x%02X", data_read);
-  Serial.println(buffer);
-
-  data_read = readCycle(0x01);
-  sprintf(buffer, "Indirizzo 0x01 - Valore letto: 0x%02X", data_read);
-  Serial.println(buffer);
-
-  data_read = readCycle(0x02);
-  sprintf(buffer, "Indirizzo 0x02 - Valore letto: 0x%02X", data_read);
-  Serial.println(buffer);
-
-  data_read = readCycle(0x03);
-  sprintf(buffer, "Indirizzo 0x03 - Valore letto: 0x%02X", data_read);
-  Serial.println(buffer);
-  */
-
-  
 }
 
 void loop() {
